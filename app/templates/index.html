@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <style>
+        /* Estilos para dar formato a la lista de tareas */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task-item {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .task-description {
+            flex-grow: 1;
+            font-size: 18px;
+        }
+
+        .task-status {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 16px;
+        }
+
+        .task-actions {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .task-actions a {
+            text-decoration: none;
+            color: #d9534f;
+        }
+
+        .task-actions a:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Tareas</h1>
+
+    <div class="container">
+        <!-- Formulario para agregar una nueva tarea -->
+        <form action="/agregar_tarea" method="POST">
+            <input type="text" name="descripcion" placeholder="Nueva tarea" required>
+            <input type="submit" value="Agregar">
+        </form>
+
+        <!-- Lista de tareas en forma de lista -->
+        <ul class="task-list">
+            {% for tarea in tareas %}
+                <li class="task-item">
+                    <span class="task-description">{{ tarea.descripcion }}</span>
+                    <span class="task-status">
+                        {% if tarea.estado == 0 %}
+                            Pendiente
+                        {% else %}
+                            Completada
+                        {% endif %}
+                    </span>
+                    <span class="task-actions">
+                        <a href="/completar_tarea/{{ tarea.Id }}">Marcar como completada</a>
+                        |
+                        <a href="/eliminar_tarea/{{ tarea.Id }}">Eliminar</a>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

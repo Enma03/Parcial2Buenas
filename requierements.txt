@@ -1,0 +1,7 @@
+Requisitos
+Antes de ejecutar esta aplicación, asegúrate de tener instalados los siguientes componentes:
+
+Python 3.x
+Flask
+pyodbc
+Microsoft Access Driver (para acceder a la base de datos Access)
